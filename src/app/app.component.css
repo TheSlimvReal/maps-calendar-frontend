@@ -1,0 +1,33 @@
+.nav-container {
+    position: absolute;
+    top: 50px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+mat-sidenav-container, mat-sidenav-content, mat-sidenav {
+    height: 100%;
+}
+
+mat-sidenav {
+    width: 250px;
+}
+
+main {
+    padding: 10px;
+}
+
+.divider {
+    height: 1px;
+    margin: 9px;
+    overflow: hidden
+}
+a {
+    text-decoration: None;
+    color: white;
+}
+
+a:hover, a:active {
+    background-color: lightgray;
+}

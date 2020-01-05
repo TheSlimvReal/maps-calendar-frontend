@@ -1,0 +1,27 @@
+<form style="width: 250px" [formGroup]="entryForm" (ngSubmit)="submitForm()">
+    <mat-form-field>
+        <input matInput placeholder="ID" formControlName="id" type="text">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Title" formControlName="title" type="text">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Start time" [owlDateTime]="startTime" [owlDateTimeTrigger]="startTime" [formControlName]="'start'" type="text">
+        <owl-date-time #startTime></owl-date-time>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="End time" [owlDateTime]="endTime" [owlDateTimeTrigger]="endTime" [formControlName]="'end'" type="text">
+        <owl-date-time #endTime></owl-date-time>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Longitude" formControlName="longitude" type="text">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Latitude" formControlName="latitude" type="text">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Notes" formControlName="notes" type="text">
+    </mat-form-field>
+
+    <button mat-button type="submit">Submit</button>
+</form>

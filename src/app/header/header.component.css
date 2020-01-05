@@ -1,0 +1,14 @@
+mat-toolbar{
+    border-radius: 3px;
+    height: 56px;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+@media(max-width: 959px){
+    mat-toolbar{
+        border-radius: 0;
+    }
+}
