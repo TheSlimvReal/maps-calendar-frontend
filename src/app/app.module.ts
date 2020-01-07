@@ -17,7 +17,7 @@ import { AddEntryComponent } from './add-entry/add-entry.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
-import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
+import {OWL_DATE_TIME_LOCALE, OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 import {HttpClientModule} from '@angular/common/http';
 import {CalendarService} from './calendar.service';
 
@@ -46,7 +46,9 @@ import {CalendarService} from './calendar.service';
     OwlNativeDateTimeModule,
     HttpClientModule
   ],
-  providers: [CalendarService],
+  providers: [
+    CalendarService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
