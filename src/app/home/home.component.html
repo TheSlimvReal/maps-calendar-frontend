@@ -1,3 +1,32 @@
-<p>home works!</p>
-<button mat-button (click)="centerMap()">Center</button>
-<google-map (mapClick)="mapClicked($event)" [center]="center"></google-map>
+<div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="32px" fxLayoutAlign="flex-start">
+    <div fxFlex="1 1 calc(50% - 32px)" fxFlex.lt-sm="100%">
+        <button mat-button (click)="centerMap()">Center</button>
+        <google-map width="100%" (mapClick)="mapClicked($event)" [center]="center">
+            <map-marker
+                    *ngFor="let entry of entries"
+                    [position]="{lng: entry.longitude, lat: entry.latitude}"
+                    [label]="entry.title"
+            >
+
+            </map-marker>
+        </google-map>
+    </div>
+    <div fxFlex.lt-md="1 1 calc(50% - 32px)" fxFlex.lt-sm="100%">
+        <mat-accordion>
+            <mat-expansion-panel
+                    *ngFor="let entry of entries"
+            >
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        {{entry.title}}
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        {{entry.start.toLocaleString().substr(0, 16)}}, {{entry.end.toLocaleString().substr(0, 16)}}
+                        <mat-icon *ngIf="entry.attended">done_outline</mat-icon>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                {{entry.notes}}
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</div>

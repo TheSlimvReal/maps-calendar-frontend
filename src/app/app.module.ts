@@ -20,6 +20,9 @@ import {MatInputModule} from '@angular/material/input';
 import {OWL_DATE_TIME_LOCALE, OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 import {HttpClientModule} from '@angular/common/http';
 import {CalendarService} from './calendar.service';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,10 @@ import {CalendarService} from './calendar.service';
     MatInputModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
-    HttpClientModule
+    HttpClientModule,
+    MatExpansionModule,
+    FlexLayoutModule,
+    MatSnackBarModule
   ],
   providers: [
     CalendarService

@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {CalendarService} from '../calendar.service';
 
 @Component({
@@ -23,6 +23,7 @@ export class AddEntryComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) private data: any,
+    private dialogRef: MatDialogRef<AddEntryComponent>,
     private calendarService: CalendarService
   ) { }
 
@@ -36,6 +37,7 @@ export class AddEntryComponent implements OnInit {
 
   submitForm() {
     console.log('data', this.entryForm.getRawValue());
-    this.calendarService.saveEntry(this.entryForm.getRawValue());
+    this.calendarService.saveEntry(this.entryForm.getRawValue())
+      .then(res => this.dialogRef.close(res));
   }
 }
