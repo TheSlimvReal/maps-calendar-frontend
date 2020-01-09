@@ -1,1 +1,26 @@
-<p>report works!</p>
+<h2>Track your progress</h2>
+Day: {{dayReport | percent}}
+<mat-progress-bar mode="determinate" [value]="dayReport * 100"></mat-progress-bar>
+Week: {{weekReport | percent}}
+<mat-progress-bar mode="determinate" [value]="weekReport * 100"></mat-progress-bar>
+Month: {{monthReport | percent}}
+<mat-progress-bar mode="determinate" [value]="monthReport * 100"></mat-progress-bar>
+Year: {{yearReport | percent}}
+<mat-progress-bar mode="determinate" [value]="yearReport * 100"></mat-progress-bar>
+
+<mat-accordion>
+    <mat-expansion-panel
+            *ngFor="let entry of entries"
+    >
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{entry.title}}
+            </mat-panel-title>
+            <mat-panel-description>
+                {{entry.start.toLocaleString().substr(0, 16)}}, {{entry.end.toLocaleString().substr(0, 16)}}
+                <mat-icon *ngIf="entry.attended">done_outline</mat-icon>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        {{entry.notes}}
+    </mat-expansion-panel>
+</mat-accordion>

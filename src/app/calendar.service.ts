@@ -7,6 +7,10 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class CalendarService {
+  private readonly getDayReportEndpoint = 'https://calendar-app-backend.herokuapp.com/dayReport';
+  private readonly getWeekReportEndpoint = 'https://calendar-app-backend.herokuapp.com/weekReport';
+  private readonly getMonthReportEndpoint = 'https://calendar-app-backend.herokuapp.com/monthReport';
+  private readonly getYearReportEndpoint = 'https://calendar-app-backend.herokuapp.com/yearReport';
   private readonly saveEntryEndpoint = 'https://calendar-app-backend.herokuapp.com/entries';
   private readonly getAllEntriesEndpoint = 'https://calendar-app-backend.herokuapp.com/entries';
   private readonly getEntriesByDateEndpoint = 'https://calendar-app-backend.herokuapp.com/date';
@@ -57,6 +61,17 @@ export class CalendarService {
     });
   }
 
+  getReportFor(period: ReportPeriod): Promise<any> {
+    let endpoint = '';
+    switch (period) {
+      case ReportPeriod.DAY: endpoint = this.getDayReportEndpoint; break;
+      case ReportPeriod.WEEK: endpoint = this.getWeekReportEndpoint; break;
+      case ReportPeriod.MONTH: endpoint = this.getMonthReportEndpoint; break;
+      case ReportPeriod.YEAR: endpoint = this.getYearReportEndpoint; break;
+    }
+    return this.http.get(endpoint).toPromise();
+  }
+
   mapCalendarResponse(response): CalendarEntry[] {
     return response.map(entry => new CalendarEntry(
       entry.id,
@@ -81,4 +96,11 @@ export class CalendarService {
           res => reject(res))
     ));
   }
+}
+
+export enum ReportPeriod {
+  DAY,
+  WEEK,
+  MONTH,
+  YEAR
 }

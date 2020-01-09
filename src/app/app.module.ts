@@ -17,12 +17,14 @@ import { AddEntryComponent } from './add-entry/add-entry.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
-import {OWL_DATE_TIME_LOCALE, OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
+import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 import {HttpClientModule} from '@angular/common/http';
 import {CalendarService} from './calendar.service';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {CommonModule} from '@angular/common';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     HttpClientModule,
     MatExpansionModule,
     FlexLayoutModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    CommonModule,
+    MatProgressBarModule
   ],
   providers: [
     CalendarService
