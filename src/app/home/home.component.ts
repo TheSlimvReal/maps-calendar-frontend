@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {AddEntryComponent} from '../add-entry/add-entry.component';
 import {CalendarService} from '../calendar.service';
 import {CalendarEntry} from '../calendarEntry';
+import {GoogleMap} from '@angular/google-maps';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +13,8 @@ import {CalendarEntry} from '../calendarEntry';
 export class HomeComponent implements OnInit {
 
   public entries: CalendarEntry[] = [];
+
+  @ViewChild('map') map: GoogleMap;
 
   constructor(
     private calendarService: CalendarService,
@@ -26,7 +29,12 @@ export class HomeComponent implements OnInit {
 
   loadCalendarEntries() {
     this.calendarService.subscribeToChanges()
-      .subscribe(res => this.entries = res);
+      .subscribe(res => {
+        this.entries = res;
+        const bounds = new google.maps.LatLngBounds();
+        this.entries.forEach(e => bounds.extend({lng: e.longitude, lat: e.latitude}));
+        this.map.fitBounds(bounds);
+      });
   }
 
   mapClicked(event) {

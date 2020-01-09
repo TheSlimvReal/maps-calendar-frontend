@@ -1,7 +1,7 @@
 <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="32px" fxLayoutAlign="flex-start">
     <div fxFlex="1 1 calc(50% - 32px)" fxFlex.lt-sm="100%">
         <button mat-button (click)="centerMap()">Center</button>
-        <google-map width="100%" (mapClick)="mapClicked($event)" [center]="center">
+        <google-map id="map" width="100%" (mapClick)="mapClicked($event)" [center]="center" #map>
             <map-marker
                     *ngFor="let entry of entries"
                     [position]="{lng: entry.longitude, lat: entry.latitude}"
