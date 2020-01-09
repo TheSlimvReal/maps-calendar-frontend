@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {CalendarEntry} from './calendarEntry';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +13,19 @@ export class CalendarService {
   private readonly registerLocationEndpoint = 'https://calendar-app-backend.herokuapp.com/registerLocation';
   // private readonly registerLocationEndpoint = 'http://localhost:8080/registerLocation';
   // private readonly saveEntryEndpoint = 'http://localhost:8080/entries';
+
+  private eventBus: EventEmitter<void> = new EventEmitter<void>();
+
   constructor(private http: HttpClient) { }
 
-  saveEntry(entry: any): Promise<any> {
+  async saveEntry(entry: any): Promise<any> {
     let params = new HttpParams();
     Object.keys(entry).forEach(key => params = params.append(key, entry[key]));
     params = params.set('start', entry.start.toISOString());
     params = params.set('end', entry.end.toISOString());
-    return this.http.post(this.saveEntryEndpoint, null, {params}).toPromise();
+    const result = await this.http.post(this.saveEntryEndpoint, null, {params}).toPromise();
+    this.eventBus.emit();
+    return result;
   }
 
   getAllCalendarEntries(): Promise<CalendarEntry[]> {
@@ -30,9 +36,11 @@ export class CalendarService {
 
   async registerLocation(): Promise<CalendarEntry[]> {
     const loc = await this.getCurrentLocation();
-    return this.http.post(this.registerLocationEndpoint, null, {params: loc})
+    const result = await this.http.post(this.registerLocationEndpoint, null, {params: loc})
       .toPromise()
       .then(res => this.mapCalendarResponse(res));
+    this.eventBus.emit();
+    return result;
   }
 
   getEntriesByDate(): Promise<CalendarEntry[]> {
@@ -40,6 +48,13 @@ export class CalendarService {
     return this.http.get(this.getEntriesByDateEndpoint)
       .toPromise()
       .then(res => this.mapCalendarResponse(res));
+  }
+
+  subscribeToChanges(): Observable<CalendarEntry[]> {
+    return new Observable<CalendarEntry[]>((observer) => {
+      this.getEntriesByDate().then(res => observer.next(res));
+      this.eventBus.subscribe(() => this.getEntriesByDate().then(res => observer.next(res)));
+    });
   }
 
   mapCalendarResponse(response): CalendarEntry[] {

@@ -24,8 +24,9 @@ export class HomeComponent implements OnInit {
     this.loadCalendarEntries();
   }
 
-  async loadCalendarEntries() {
-    this.entries = await this.calendarService.getEntriesByDate();
+  loadCalendarEntries() {
+    this.calendarService.subscribeToChanges()
+      .subscribe(res => this.entries = res);
   }
 
   mapClicked(event) {
