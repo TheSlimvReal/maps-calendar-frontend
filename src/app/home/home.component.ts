@@ -48,4 +48,8 @@ export class HomeComponent implements OnInit {
     this.calendarService.getCurrentLocation()
       .then(loc => this.center = {lng: loc.longitude, lat: loc.latitude});
   }
+
+  entryClick(entry: CalendarEntry) {
+    this.center = {lng: entry.longitude, lat: entry.latitude};
+  }
 }
