@@ -36,7 +36,6 @@ export class AddEntryComponent implements OnInit {
   }
 
   submitForm() {
-    console.log('data', this.entryForm.getRawValue());
     this.calendarService.saveEntry(this.entryForm.getRawValue())
       .then(res => this.dialogRef.close(res));
   }

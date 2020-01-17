@@ -1,6 +1,11 @@
 <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="32px" fxLayoutAlign="flex-start">
     <div fxFlex="1 1 calc(50% - 32px)" fxFlex.lt-sm="100%">
         <button mat-button (click)="centerMap()">Center</button>
+        <mat-form-field>
+            <input matInput [(ngModel)]="date" (dateInput)="dateChange()" (dateChange)="dateChange()" [matDatepicker]="picker" placeholder="Choose a date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
         <google-map id="map" width="100%" (mapClick)="mapClicked($event)" [center]="center" #map>
             <map-marker
                     *ngFor="let entry of entries"

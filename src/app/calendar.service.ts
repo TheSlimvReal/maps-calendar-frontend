@@ -47,9 +47,14 @@ export class CalendarService {
     return result;
   }
 
-  getEntriesByDate(): Promise<CalendarEntry[]> {
+  getEntriesByDate(date?: Date): Promise<CalendarEntry[]> {
+    const params = {};
+    if (date) {
+      // tslint:disable-next-line:no-string-literal
+      params['date'] = date.toISOString();
+    }
     // TODO order by date
-    return this.http.get(this.getEntriesByDateEndpoint)
+    return this.http.get(this.getEntriesByDateEndpoint, {params})
       .toPromise()
       .then(res => this.mapCalendarResponse(res));
   }

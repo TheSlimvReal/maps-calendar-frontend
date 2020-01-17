@@ -15,7 +15,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {GoogleMapsModule} from '@angular/google-maps';
 import { AddEntryComponent } from './add-entry/add-entry.component';
 import {MatDialogModule} from '@angular/material/dialog';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 import {HttpClientModule} from '@angular/common/http';
@@ -25,6 +25,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {CommonModule} from '@angular/common';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,10 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     FlexLayoutModule,
     MatSnackBarModule,
     CommonModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatDatepickerModule,
+    FormsModule,
+    MatNativeDateModule
   ],
   providers: [
     CalendarService

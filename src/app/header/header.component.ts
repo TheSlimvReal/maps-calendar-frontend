@@ -36,7 +36,6 @@ export class HeaderComponent implements OnInit {
         if (res.length > 0) {
           message = res.map(e => e.title).join(', ');
           message += ` marked as attended (${res.length} in total)`;
-          console.log('message', message);
         } else {
           message = 'No calendar entry attended';
         }

@@ -23,6 +23,8 @@ export class HomeComponent implements OnInit {
 
   center: google.maps.LatLngLiteral = {lng: 8.418479132289349, lat: 49.01336057043188};
 
+  date = new Date(Date.now());
+
   ngOnInit() {
     this.loadCalendarEntries();
   }
@@ -51,5 +53,10 @@ export class HomeComponent implements OnInit {
 
   entryClick(entry: CalendarEntry) {
     this.center = {lng: entry.longitude, lat: entry.latitude};
+  }
+
+  dateChange() {
+    this.calendarService.getEntriesByDate(this.date)
+      .then(res => this.entries = res);
   }
 }
