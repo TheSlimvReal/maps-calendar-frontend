@@ -30,7 +30,10 @@
                         <mat-icon *ngIf="entry.attended">done_outline</mat-icon>
                     </mat-panel-description>
                 </mat-expansion-panel-header>
-                {{entry.notes}}
+                <p style="width: fit-content; float: left">{{entry.notes}}</p>
+                <button style="width: fit-content; float: right" mat-icon-button (click)="editEntry(entry)">
+                    <mat-icon>edit</mat-icon>
+                </button>
             </mat-expansion-panel>
         </mat-accordion>
     </div>

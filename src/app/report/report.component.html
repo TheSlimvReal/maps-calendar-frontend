@@ -8,6 +8,8 @@ Month: {{monthReport | percent}}
 Year: {{yearReport | percent}}
 <mat-progress-bar mode="determinate" [value]="yearReport * 100"></mat-progress-bar>
 
+<h2>All Calendar Entries</h2>
+
 <mat-accordion>
     <mat-expansion-panel
             *ngFor="let entry of entries"

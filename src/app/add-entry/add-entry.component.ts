@@ -39,4 +39,9 @@ export class AddEntryComponent implements OnInit {
     this.calendarService.saveEntry(this.entryForm.getRawValue())
       .then(res => this.dialogRef.close(res));
   }
+
+  deleteEntry() {
+    this.calendarService.deleteEntry(this.entryForm.get('id').value)
+      .then(() => this.dialogRef.close(this.entryForm.getRawValue()));
+  }
 }

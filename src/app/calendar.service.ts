@@ -15,6 +15,7 @@ export class CalendarService {
   private readonly getAllEntriesEndpoint = 'https://calendar-app-backend.herokuapp.com/entries';
   private readonly getEntriesByDateEndpoint = 'https://calendar-app-backend.herokuapp.com/date';
   private readonly registerLocationEndpoint = 'https://calendar-app-backend.herokuapp.com/registerLocation';
+  private readonly deleteEntryEndpoint = 'https://calendar-app-backend.herokuapp.com/entries';
   // private readonly registerLocationEndpoint = 'http://localhost:8080/registerLocation';
   // private readonly saveEntryEndpoint = 'http://localhost:8080/entries';
 
@@ -81,8 +82,8 @@ export class CalendarService {
     return response.map(entry => new CalendarEntry(
       entry.id,
       entry.title,
-      entry.start,
-      entry.end,
+      new Date(entry.start),
+      new Date(entry.end),
       entry.location.x,
       entry.location.y,
       entry.notes,
@@ -100,6 +101,11 @@ export class CalendarService {
           }),
           res => reject(res))
     ));
+  }
+
+  deleteEntry(id) {
+    return this.http.delete(this.deleteEntryEndpoint, {params: {id}})
+      .toPromise();
   }
 }
 

@@ -42,7 +42,11 @@ export class HomeComponent implements OnInit {
   mapClicked(event) {
     const latitude = event.latLng.lat();
     const longitude = event.latLng.lng();
-    const dialog = this.dialog.open(AddEntryComponent, {data: {longitude, latitude}});
+    this.openDialog({longitude, latitude});
+  }
+
+  private openDialog(data) {
+    const dialog = this.dialog.open(AddEntryComponent, {data});
     dialog.afterClosed().subscribe(res => res ? this.loadCalendarEntries() : null);
   }
 
@@ -58,5 +62,9 @@ export class HomeComponent implements OnInit {
   dateChange() {
     this.calendarService.getEntriesByDate(this.date)
       .then(res => this.entries = res);
+  }
+
+  editEntry(entry: CalendarEntry) {
+    this.openDialog(entry);
   }
 }
