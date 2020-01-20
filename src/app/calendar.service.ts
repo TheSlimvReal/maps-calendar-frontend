@@ -7,17 +7,15 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class CalendarService {
-  private readonly getDayReportEndpoint = 'https://calendar-app-backend.herokuapp.com/dayReport';
-  private readonly getWeekReportEndpoint = 'https://calendar-app-backend.herokuapp.com/weekReport';
-  private readonly getMonthReportEndpoint = 'https://calendar-app-backend.herokuapp.com/monthReport';
-  private readonly getYearReportEndpoint = 'https://calendar-app-backend.herokuapp.com/yearReport';
-  private readonly saveEntryEndpoint = 'https://calendar-app-backend.herokuapp.com/entries';
-  private readonly getAllEntriesEndpoint = 'https://calendar-app-backend.herokuapp.com/entries';
-  private readonly getEntriesByDateEndpoint = 'https://calendar-app-backend.herokuapp.com/date';
-  private readonly registerLocationEndpoint = 'https://calendar-app-backend.herokuapp.com/registerLocation';
-  private readonly deleteEntryEndpoint = 'https://calendar-app-backend.herokuapp.com/entries';
-  // private readonly registerLocationEndpoint = 'http://localhost:8080/registerLocation';
-  // private readonly saveEntryEndpoint = 'http://localhost:8080/entries';
+  private readonly getDayReportEndpoint = 'localhost:8080/dayReport';
+  private readonly getWeekReportEndpoint = 'localhost:8080/weekReport';
+  private readonly getMonthReportEndpoint = 'localhost:8080/monthReport';
+  private readonly getYearReportEndpoint = 'localhost:8080/yearReport';
+  private readonly saveEntryEndpoint = 'localhost:8080/entries';
+  private readonly getAllEntriesEndpoint = 'localhost:8080/entries';
+  private readonly getEntriesByDateEndpoint = 'localhost:8080/date';
+  private readonly registerLocationEndpoint = 'localhost:8080/registerLocation';
+  private readonly deleteEntryEndpoint = 'localhost:8080/entries';
 
   private eventBus: EventEmitter<void> = new EventEmitter<void>();
 
